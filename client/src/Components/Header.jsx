@@ -1,6 +1,10 @@
 import React from 'react'
+import { CryptoContextState } from '../Context/CryptoContextAPI'
 
 const Header = () => {
+
+    const { currency, setCurrency, symbol } = CryptoContextState()
+
     return (
         <div
             style={{
@@ -14,12 +18,11 @@ const Header = () => {
             <h1>logo</h1>
             <h3>username</h3>
             <h3>button</h3>
-            <select name="cars" id="cars">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+            <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
+                <option value='INR'>INR</option>
+                <option value="USD">USD</option>
             </select>
+            <h2>{symbol}</h2>
         </div>
     )
 }
