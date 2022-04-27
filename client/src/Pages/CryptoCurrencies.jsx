@@ -1,4 +1,5 @@
 import React from 'react'
+import CryptoCoins from '../components/CryptoCoins'
 import LeftNavbar from '../components/LeftNavbar'
 
 const CryptoCurrencies = () => {
@@ -9,10 +10,12 @@ const CryptoCurrencies = () => {
                 style={{
                     flex: 9.5,
                     height: '90vh',
-                    backgroundColor: 'yellowgreen'
+                    backgroundColor: 'yellowgreen',
+                    overflowY: 'scroll'
                 }}
             >
                 <h1>cryptocurrencies</h1>
+                <CryptoCoins />
             </div>
         </div>
     )

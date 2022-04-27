@@ -16,7 +16,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/cryptocurrencies' element={<CryptoCurrencies />} />
-        <Route path='/crypto' element={<CryptoDetails />} />
+        <Route path='/crypto/:id' element={<CryptoDetails />} />
         <Route path='/news' element={<News />} />
         <Route path='*' element={<Error404 />} />
       </Routes>
