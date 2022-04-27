@@ -1,5 +1,5 @@
 import React from 'react'
-import CryptoDetailsNavbar from '../Components/CryptoDetailsNavbar'
+import CryptoDetailsNavbar from '../components/CryptoDetailsNavbar'
 
 const CryptoDetails = () => {
     return (

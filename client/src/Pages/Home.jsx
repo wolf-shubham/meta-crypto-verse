@@ -1,5 +1,5 @@
 import React from 'react'
-import LeftNavbar from '../Components/LeftNavbar'
+import LeftNavbar from '../components/LeftNavbar'
 
 const Home = () => {
     return (

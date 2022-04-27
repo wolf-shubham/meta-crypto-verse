@@ -1,5 +1,5 @@
 import React from 'react'
-import { CryptoContextState } from '../Context/CryptoContextAPI'
+import { CryptoContextState } from '../context/CryptoContextAPI'
 
 const Header = () => {
 

@@ -1,12 +1,12 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Header from './Components/Header';
-import Home from './Pages/Home';
-import Profile from './Pages/Profile';
-import Error404 from './Pages/Error404';
-import CryptoDetails from './Pages/CryptoDetails';
-import News from './Pages/News';
-import CryptoCurrencies from './Pages/CryptoCurrencies';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import Error404 from './pages/Error404';
+import CryptoDetails from './pages/CryptoDetails';
+import News from './pages/News';
+import CryptoCurrencies from './pages/CryptoCurrencies';
 
 function App() {
   return (
