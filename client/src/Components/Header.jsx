@@ -3,9 +3,9 @@ import { CryptoContextState } from '../context/CryptoContextAPI'
 import { Button, Dialog } from '@mui/material'
 import LoginDialog from './LoginDialog'
 
-const Header = () => {
+const Header = ({ isLoggedIn }) => {
 
-    const { currency, setCurrency, symbol } = CryptoContextState()
+    const { user, currency, setCurrency, symbol } = CryptoContextState()
 
     const [loginDialog, setLoginDialog] = useState(false)
 
@@ -28,11 +28,21 @@ const Header = () => {
                     <option value="USD">USD</option>
                 </select>
                 <h2>{symbol}</h2>
-                <Button
-                    onClick={() => setLoginDialog(true)}
-                    color="primary"
-                    variant="contained"
-                >LOGIN</Button>
+                {
+                    user && user ?
+                        <Button
+                            color="primary"
+                            variant="contained"
+                        >Logout
+                        </Button>
+                        :
+                        <Button
+                            onClick={() => setLoginDialog(true)}
+                            color="primary"
+                            variant="contained"
+                        >LOGIN</Button>
+                }
+
             </div>
             <Dialog
                 open={loginDialog}

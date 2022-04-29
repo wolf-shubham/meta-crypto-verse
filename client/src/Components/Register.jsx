@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 
 
 const Register = () => {
 
-    const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
+
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const handleSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault()
         try {
             const config = {
@@ -25,7 +26,8 @@ const Register = () => {
             }, config)
             localStorage.setItem('userInfo', JSON.stringify(data.user))
             localStorage.setItem('token', JSON.stringify(data.token))
-            navigate('/home')
+            setLoading(false)
+            window.location.reload(false)
         } catch (error) {
             console.log(error)
         }
@@ -77,7 +79,7 @@ const Register = () => {
                         variant="contained"
                         color="primary"
                         style={{ marginTop: '1rem' }}
-                    // disabled={loading}
+                        disabled={loading}
                     >REGISTER</Button>
                 </form>
                 {/* {error && <Error message={error} /> */}

@@ -9,8 +9,10 @@ const Login = () => {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const handleSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault()
         try {
             const config = {
@@ -22,7 +24,9 @@ const Login = () => {
             }, config)
             localStorage.setItem('userInfo', JSON.stringify(data.user))
             localStorage.setItem('token', JSON.stringify(data.token))
-            navigate('/home')
+            setLoading(false)
+            window.location.reload(false)
+            // navigate('/')
         } catch (error) {
             console.log(error)
         }
@@ -64,7 +68,7 @@ const Login = () => {
                         variant="contained"
                         color="primary"
                         style={{ marginTop: '1rem' }}
-                    // disabled={loading}
+                        disabled={loading}
                     >LOGIN</Button>
                 </form>
                 {/* {error && <Error message={error} /> */}

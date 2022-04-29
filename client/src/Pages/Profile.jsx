@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import LeftNavbar from '../components/LeftNavbar'
+import { CryptoContextState } from '../context/CryptoContextAPI'
 
 const Profile = () => {
+    const { user } = CryptoContextState()
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (!user) {
+            navigate('/')
+        }
+    }, [navigate, user])
+
     return (
         <div style={{ display: 'flex' }}>
             <LeftNavbar />
