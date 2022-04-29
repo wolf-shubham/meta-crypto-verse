@@ -4,6 +4,8 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import Login from './Login';
+import Register from './Register';
 
 
 const LoginDialog = () => {
@@ -17,8 +19,8 @@ const LoginDialog = () => {
     return (
         <div
             style={{
-                width: '25rem',
-                height: '35rem',
+                width: '27.5rem',
+                height: '30rem',
                 display: 'flex',
                 alignItems: 'center',
                 padding: '1rem',
@@ -60,8 +62,8 @@ const LoginDialog = () => {
                                 }} />
                         </TabList>
                     </Box>
-                    <TabPanel value="1">LOGIN</TabPanel>
-                    <TabPanel value="2">REGISTER</TabPanel>
+                    <TabPanel value="1"><Login /></TabPanel>
+                    <TabPanel value="2"><Register /></TabPanel>
                 </TabContext>
             </Box >
         </div>
