@@ -46,6 +46,56 @@ const login = async (req, res) => {
     }
 }
 
+const addCoin = async (req, res) => {
+    try {
+        const { coin } = req.body
+        const user = await User.findById(req.user._id).select('-password')
+        if (!user) {
+            return res.status(400).json({
+                message: 'User not found'
+            })
+        }
+        if (user.coin.includes(coin)) {
+            return res.status(400).json({
+                message: 'Coin already added'
+            })
+        }
+        user.coin.push(coin)
+        await user.save()
+        return res.status(200).json({ user, message: 'Coin added successfully' })
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
-module.exports = { loginController: login, registerController: register }
+const removeCoin = async (req, res) => {
+    try {
+        const { coin } = req.body
+        const user = await User.findById(req.user._id).select('-password')
+        if (!user) {
+            return res.status(400).json({
+                message: 'User not found'
+            })
+        }
+        if (!user.coin.includes(coin)) {
+            return res.status(400).json({
+                message: 'Coin not found'
+            })
+        }
+        user.coin.splice(user.coin.indexOf(coin), 1)
+        await user.save()
+        return res.status(200).json({ user, message: 'Coin removed successfully' })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+
+module.exports = {
+    loginController: login,
+    registerController: register,
+    addCoinController: addCoin,
+    removeCoinController: removeCoin
+}

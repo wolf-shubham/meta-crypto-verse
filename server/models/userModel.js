@@ -14,6 +14,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    coin: [
+        {
+            type: String,
+        }
+    ]
 },
     {
         timestamps: true
