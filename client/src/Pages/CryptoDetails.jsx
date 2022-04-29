@@ -7,24 +7,26 @@ import axios from 'axios'
 import { SingleCoin } from '../config/Api'
 import { useEffect } from 'react'
 import { CryptoContextState } from '../context/CryptoContextAPI'
+import { CircularProgress } from '@mui/material'
 
 const CryptoDetails = () => {
 
-    // const { id } = useParams()
-    // const [coin, setCoin] = useState()
+    const { id } = useParams()
+    const [coin, setCoin] = useState()
 
-    // const { currency, symbol } = CryptoContextState()
+    const { currency, symbol } = CryptoContextState()
 
-    // const fetchCoin = async () => {
-    //     const { data } = await axios.get(SingleCoin(id))
-    //     // console.log(data)
-    //     setCoin(data)
-    // }
+    const fetchCoin = async () => {
+        const { data } = await axios.get(SingleCoin(id))
+        // console.log(data)
+        setCoin(data)
+    }
 
-    // useEffect(() => {
-    //     fetchCoin()
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [currency])
+    useEffect(() => {
+        fetchCoin()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currency])
+
 
     return (
         <div style={{ display: 'flex' }}>
@@ -36,7 +38,8 @@ const CryptoDetails = () => {
                     backgroundColor: 'yellowgreen'
                 }}
             >
-                <CryptoChart />
+                {!coin ? <CircularProgress /> : <CryptoChart coin={coin} />}
+
             </div>
         </div>
     )
