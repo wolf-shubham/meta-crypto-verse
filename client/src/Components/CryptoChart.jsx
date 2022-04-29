@@ -6,6 +6,7 @@ import { HistoricalChart } from '../config/Api'
 import { CryptoContextState } from '../context/CryptoContextAPI'
 import { Line } from "react-chartjs-2"
 import { CircularProgress } from '@mui/material'
+// eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from 'chart.js/auto'
 
 const CryptoChart = ({ coin }) => {

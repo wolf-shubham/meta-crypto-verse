@@ -14,7 +14,7 @@ const CryptoDetails = () => {
     const { id } = useParams()
     const [coin, setCoin] = useState()
 
-    const { currency, symbol } = CryptoContextState()
+    const { currency } = CryptoContextState()
 
     const fetchCoin = async () => {
         const { data } = await axios.get(SingleCoin(id))
@@ -30,7 +30,7 @@ const CryptoDetails = () => {
 
     return (
         <div style={{ display: 'flex' }}>
-            <CryptoDetailsNavbar />
+            {!coin ? <CircularProgress /> : <CryptoDetailsNavbar coin={coin} />}
             <div
                 style={{
                     flex: 9.5,
