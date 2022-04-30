@@ -1,4 +1,6 @@
+import axios from "axios"
 import { createContext, useContext, useEffect, useState } from "react"
+import { CoinList } from "../config/Api"
 
 const Crypto = createContext()
 
@@ -7,6 +9,45 @@ const CryptoContext = ({ children }) => {
     const [symbol, setSymbol] = useState('₹')
     const [user, setUser] = useState()
     const [token, setToken] = useState()
+    const [coinsData, setCoinsData] = useState([])
+    const [watchlistCoin, setWatchlistCoin] = useState([])
+
+    const fetchCoins = async () => {
+        const token = JSON.parse(localStorage.getItem("token"))
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+            const { data } = await axios.get('/user/allcoins', config)
+            // console.log(data)
+            setWatchlistCoin(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const fetchCoinsData = async () => {
+        try {
+            const { data } = await axios.get(CoinList(currency))
+            // console.log(data)
+            setCoinsData(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        fetchCoinsData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    useEffect(() => {
+        fetchCoins()
+    }, [])
+
 
     useEffect(() => {
         if (currency === 'INR') {
@@ -24,7 +65,7 @@ const CryptoContext = ({ children }) => {
     }, [user, token])
 
     return (
-        <Crypto.Provider value={{ currency, setCurrency, symbol, setSymbol, user, setUser, token, setToken }}>
+        <Crypto.Provider value={{ currency, setCurrency, symbol, setSymbol, user, setUser, token, setToken, coinsData, setCoinsData, watchlistCoin, setWatchlistCoin }}>
             {children}
         </Crypto.Provider>
     )

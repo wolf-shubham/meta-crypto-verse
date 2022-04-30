@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { CryptoContextState } from '../context/CryptoContextAPI'
 import { Button, Dialog } from '@mui/material'
 import LoginDialog from './LoginDialog'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
 
@@ -28,7 +29,7 @@ const Header = () => {
                     alignItems: 'center'
                 }}
             >
-                <h1>logo</h1>
+                <Link to='/'><h1>Crypto</h1></Link>
                 <h3>username</h3>
                 <h3>button</h3>
                 <select value={currency} onChange={(e) => setCurrency(e.target.value)}>

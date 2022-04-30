@@ -37,6 +37,7 @@ const Home = () => {
                     overflowY: 'scroll'
                 }}
             >
+                <Link to='/'><h1>Crypto</h1></Link>
                 <h1>home</h1>
                 <div className="globalStats">
                     <h2>global crypto stats</h2>

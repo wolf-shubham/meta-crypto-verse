@@ -11,12 +11,14 @@ import { Button } from '@mui/material'
 
 const CryptoDetailsNavbar = ({ coin }) => {
 
-    const { token, currency, symbol } = CryptoContextState()
+    const { token, currency, symbol, watchlistCoin, setWatchlistCoin } = CryptoContextState()
 
     const [coinData, setCoinData] = useState()
     const [loading, setLoading] = useState(false)
 
     const coinId = coin?.id
+
+    const watchlist = watchlistCoin.includes(coinId)
 
     const fetchCoin = async () => {
         const { data } = await axios.get(SingleCoin(coin.id))
@@ -40,16 +42,43 @@ const CryptoDetailsNavbar = ({ coin }) => {
             }, config)
             console.log(data)
             setLoading(false)
-            window.location.reload(false)
+            setWatchlistCoin([...watchlistCoin, coinId])
+            // console.log(watchlistCoin)
+            // window.location.reload(false)
         } catch (error) {
             console.log(error)
         }
     }
 
+    const handleRemoveCoin = async (e) => {
+        setLoading(true)
+        e.preventDefault()
+        console.log('handleRemoveCoin')
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+            const { data } = await axios.put('/user/removecoin', {
+                coin: coinId,
+            }, config)
+            // console.log(data)
+            setLoading(false)
+            setWatchlistCoin(watchlistCoin.filter(coin => coin !== coinId))
+            // console.log(watchlistCoin)
+            // window.location.reload(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
     useEffect(() => {
         fetchCoin()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currency])
+    }, [currency, watchlistCoin])
 
     return (
         <div
@@ -80,12 +109,12 @@ const CryptoDetailsNavbar = ({ coin }) => {
                             marginTop: '10px',
                             marginBottom: '10px'
                         }}
-                        onClick={handleSubmit}
-                    >add to watchlist
+                        onClick={watchlist ? handleRemoveCoin : handleSubmit}
+                    >{watchlist ? 'remove from watchlist' : 'add to watchlist'}
                     </Button>
                 </>
             }
-        </div>
+        </div >
     )
 }
 

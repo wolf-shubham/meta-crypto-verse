@@ -13,7 +13,6 @@ const CryptoCoins = () => {
 
     const fetchCoins = async () => {
         const { data } = await axios.get(CoinList(currency))
-        // console.log(data);
         setCoins(data)
     }
 
@@ -23,9 +22,11 @@ const CryptoCoins = () => {
 
     useEffect(() => {
         fetchCoins()
-    })
-    useEffect(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currency])
+
+    // useEffect(() => {
+    // }, [currency])
 
 
     return (
