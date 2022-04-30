@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react'
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
@@ -7,10 +8,15 @@ import Error404 from './pages/Error404';
 import CryptoDetails from './pages/CryptoDetails';
 import News from './pages/News';
 import CryptoCurrencies from './pages/CryptoCurrencies';
-import { CryptoContextState } from './context/CryptoContextAPI';
-import { useState } from 'react';
+import { CryptoContextState } from './context/CryptoContextAPI'
+
 
 function App() {
+
+  const { user } = CryptoContextState()
+  useEffect(() => {
+
+  }, [user])
 
   return (
     <div className="App">

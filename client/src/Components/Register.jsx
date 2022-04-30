@@ -6,8 +6,6 @@ import axios from 'axios'
 const Register = () => {
 
     const [loading, setLoading] = useState(false)
-
-
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -29,6 +27,7 @@ const Register = () => {
             setLoading(false)
             window.location.reload(false)
         } catch (error) {
+            setLoading(false)
             console.log(error)
         }
     }

@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CryptoContextState } from '../context/CryptoContextAPI'
 import { Button, Dialog } from '@mui/material'
 import LoginDialog from './LoginDialog'
 
-const Header = ({ isLoggedIn }) => {
+const Header = () => {
 
     const { user, currency, setCurrency, symbol } = CryptoContextState()
 
     const [loginDialog, setLoginDialog] = useState(false)
+
+    const handleLogout = () => {
+        localStorage.removeItem('userInfo')
+        localStorage.removeItem('token')
+    }
+    useEffect(() => {
+
+    }, [user])
 
     return (
         <>
@@ -33,6 +41,7 @@ const Header = ({ isLoggedIn }) => {
                         <Button
                             color="primary"
                             variant="contained"
+                            onClick={handleLogout}
                         >Logout
                         </Button>
                         :

@@ -7,16 +7,43 @@ import { CryptoContextState } from '../context/CryptoContextAPI'
 import ReactHtmlParser from 'react-html-parser'
 import { numberWithCommas } from '../config/Functions'
 import millify from 'millify'
+import { Button } from '@mui/material'
 
 const CryptoDetailsNavbar = ({ coin }) => {
 
+    const { token, currency, symbol } = CryptoContextState()
+
     const [coinData, setCoinData] = useState()
-    const { currency, symbol } = CryptoContextState()
+    const [loading, setLoading] = useState(false)
+
+    const coinId = coin?.id
 
     const fetchCoin = async () => {
         const { data } = await axios.get(SingleCoin(coin.id))
-        console.log(data)
+        // console.log(data)
         setCoinData(data)
+    }
+
+    const handleSubmit = async (e) => {
+        setLoading(true)
+        e.preventDefault()
+        console.log('handleSubmit')
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+            const { data } = await axios.put('/user/addcoin', {
+                coin: coinId,
+            }, config)
+            console.log(data)
+            setLoading(false)
+            window.location.reload(false)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     useEffect(() => {
@@ -45,6 +72,17 @@ const CryptoDetailsNavbar = ({ coin }) => {
                     <h3>Rank : {coinData.market_cap_rank}</h3>
                     <h3>Current Price : {symbol} {numberWithCommas(coinData.market_data.current_price[currency.toLowerCase()])}</h3>
                     <h3>Market Cap : {symbol} {millify(coinData.market_data.market_cap[currency.toLowerCase()])}</h3>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        disabled={loading}
+                        style={{
+                            marginTop: '10px',
+                            marginBottom: '10px'
+                        }}
+                        onClick={handleSubmit}
+                    >add to watchlist
+                    </Button>
                 </>
             }
         </div>

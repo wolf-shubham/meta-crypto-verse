@@ -46,6 +46,20 @@ const login = async (req, res) => {
     }
 }
 
+const fetchCoins = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id)
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' })
+        }
+        const coins = user.coin
+        return res.status(200).json(coins)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 const addCoin = async (req, res) => {
     try {
         const { coin } = req.body
@@ -97,5 +111,6 @@ module.exports = {
     loginController: login,
     registerController: register,
     addCoinController: addCoin,
-    removeCoinController: removeCoin
+    removeCoinController: removeCoin,
+    fetchCoinsController: fetchCoins
 }

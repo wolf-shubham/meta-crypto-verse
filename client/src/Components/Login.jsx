@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 
 
 const Login = () => {
 
-    const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
@@ -26,8 +24,8 @@ const Login = () => {
             localStorage.setItem('token', JSON.stringify(data.token))
             setLoading(false)
             window.location.reload(false)
-            // navigate('/')
         } catch (error) {
+            setLoading(false)
             console.log(error)
         }
     }
