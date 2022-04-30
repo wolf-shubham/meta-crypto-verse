@@ -12,12 +12,6 @@ import CryptoCurrencies from './pages/CryptoCurrencies';
 
 function App() {
 
-  // const { user } = CryptoContextState()
-
-  // useEffect(() => {
-
-  // }, [user])
-
   return (
     <div className="App">
       <Header />

@@ -11,7 +11,7 @@ import { Button } from '@mui/material'
 
 const CryptoDetailsNavbar = ({ coin }) => {
 
-    const { token, currency, symbol, watchlistCoin, setWatchlistCoin } = CryptoContextState()
+    const { user, token, currency, symbol, watchlistCoin, setWatchlistCoin } = CryptoContextState()
 
     const [coinData, setCoinData] = useState()
     const [loading, setLoading] = useState(false)
@@ -22,7 +22,6 @@ const CryptoDetailsNavbar = ({ coin }) => {
 
     const fetchCoin = async () => {
         const { data } = await axios.get(SingleCoin(coin.id))
-        // console.log(data)
         setCoinData(data)
     }
 
@@ -43,8 +42,6 @@ const CryptoDetailsNavbar = ({ coin }) => {
             console.log(data)
             setLoading(false)
             setWatchlistCoin([...watchlistCoin, coinId])
-            // console.log(watchlistCoin)
-            // window.location.reload(false)
         } catch (error) {
             console.log(error)
         }
@@ -64,11 +61,9 @@ const CryptoDetailsNavbar = ({ coin }) => {
             const { data } = await axios.put('/user/removecoin', {
                 coin: coinId,
             }, config)
-            // console.log(data)
+            console.log(data)
             setLoading(false)
             setWatchlistCoin(watchlistCoin.filter(coin => coin !== coinId))
-            // console.log(watchlistCoin)
-            // window.location.reload(false)
         } catch (error) {
             console.log(error)
         }
@@ -101,17 +96,21 @@ const CryptoDetailsNavbar = ({ coin }) => {
                     <h3>Rank : {coinData.market_cap_rank}</h3>
                     <h3>Current Price : {symbol} {numberWithCommas(coinData.market_data.current_price[currency.toLowerCase()])}</h3>
                     <h3>Market Cap : {symbol} {millify(coinData.market_data.market_cap[currency.toLowerCase()])}</h3>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        disabled={loading}
-                        style={{
-                            marginTop: '10px',
-                            marginBottom: '10px'
-                        }}
-                        onClick={watchlist ? handleRemoveCoin : handleSubmit}
-                    >{watchlist ? 'remove from watchlist' : 'add to watchlist'}
-                    </Button>
+                    {user ?
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            disabled={loading}
+                            style={{
+                                marginTop: '10px',
+                                marginBottom: '10px'
+                            }}
+                            onClick={watchlist ? handleRemoveCoin : handleSubmit}
+                        >{watchlist ? 'remove from watchlist' : 'add to watchlist'}
+                        </Button> :
+                        null
+                    }
+
                 </>
             }
         </div >

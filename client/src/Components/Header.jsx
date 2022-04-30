@@ -30,13 +30,11 @@ const Header = () => {
                 }}
             >
                 <Link to='/'><h1>Crypto</h1></Link>
-                <h3>username</h3>
-                <h3>button</h3>
+                <h3>{user?.name}</h3>
                 <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
-                    <option value='INR'>INR</option>
-                    <option value="USD">USD</option>
+                    <option value='INR'>INR {symbol}</option>
+                    <option value="USD">USD {symbol}</option>
                 </select>
-                <h2>{symbol}</h2>
                 {
                     user && user ?
                         <Button

@@ -7,7 +7,7 @@ const Crypto = createContext()
 const CryptoContext = ({ children }) => {
     const [currency, setCurrency] = useState('INR')
     const [symbol, setSymbol] = useState('₹')
-    const [user, setUser] = useState()
+    const [user, setUser] = useState(null)
     const [token, setToken] = useState()
     const [coinsData, setCoinsData] = useState([])
     const [watchlistCoin, setWatchlistCoin] = useState([])
@@ -32,7 +32,6 @@ const CryptoContext = ({ children }) => {
     const fetchCoinsData = async () => {
         try {
             const { data } = await axios.get(CoinList(currency))
-            // console.log(data)
             setCoinsData(data)
         } catch (error) {
             console.log(error)
