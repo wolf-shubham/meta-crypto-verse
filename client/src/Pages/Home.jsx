@@ -16,7 +16,6 @@ const Home = () => {
         setLoading(true)
         const { data } = await axios.get(TrendingCoins(currency))
         // console.log(data);
-
         setTrending(data)
         setLoading(false)
     }
@@ -32,13 +31,12 @@ const Home = () => {
             <div
                 style={{
                     flex: 9.5,
+                    // width: '75%',
                     height: '90vh',
-                    backgroundColor: 'yellowgreen',
-                    overflowY: 'scroll'
+                    backgroundColor: 'white',
+                    overflowY: 'scroll',
                 }}
             >
-                <Link to='/'><h1>Crypto</h1></Link>
-                <h1>home</h1>
                 <div className="globalStats">
                     <h2>global crypto stats</h2>
                     {/* <h3>{data.coins.name}</h3> */}

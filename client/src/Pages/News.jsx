@@ -25,7 +25,7 @@ const News = () => {
                 }
             }
             const { data } = await axios(options)
-            console.log(data)
+            // console.log(data)
             setNews(data.value)
         } catch (error) {
             console.error(error);

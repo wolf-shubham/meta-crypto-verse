@@ -1,17 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const LeftNavbar = () => {
+
+    const [tab, setTab] = useState(window.location.pathname)
+
     return (
         <div style={{
             flex: 2.5,
             height: '90vh',
-            backgroundColor: 'darkgoldenrod'
+            backgroundColor: 'black',
+            textDecoration: 'none',
+            borderLeft: 'none',
+            textAlign: 'center',
         }}>
-            <h1><Link to='/'>home</Link></h1>
-            <h1><Link to='/profile'>profile</Link></h1>
-            <h1><Link to='/news'>news</Link></h1>
-            <h1><Link to='/cryptocurrencies'>crypto-currencies</Link></h1>
+            <Link to='/' onClick={() => setTab('/')} style={{ textDecoration: 'none' }}>
+                {
+                    tab === '/' ?
+                        <h2 style={{ color: 'black', backgroundColor: 'white', padding: '0.5rem 1rem' }}>Home</h2> :
+                        <h2 style={{ color: 'goldenrod', padding: '0.5rem 1rem' }}>Home</h2>
+                }
+            </Link>
+            <Link to='/profile' onClick={() => setTab('/profile')} style={{ textDecoration: 'none' }}>
+                {
+                    tab === '/profile' ?
+                        <h2 style={{ color: 'black', backgroundColor: 'white', padding: '0.5rem 1rem' }}>Profile</h2> :
+                        <h2 style={{ color: 'goldenrod', padding: '0.5rem 1rem' }} >Profile</h2>
+                }
+            </Link>
+            <Link to='/news' onClick={() => setTab('/news')} style={{ textDecoration: 'none' }}>
+                {
+                    tab === '/news' ?
+                        <h2 style={{ color: 'black', backgroundColor: 'white', padding: '0.5rem 1rem' }}>News</h2> :
+                        <h2 style={{ color: 'goldenrod', padding: '0.5rem 1rem' }} >News</h2>
+                }
+            </Link>
+            <Link to='/cryptocurrencies' onClick={() => setTab('/cryptocurrencies')} style={{ textDecoration: 'none' }}>
+                {
+                    tab === '/cryptocurrencies' ?
+                        <h2 style={{ color: 'black', backgroundColor: 'white', padding: '0.5rem 1rem' }}>Crypto -Currencies</h2> :
+                        <h2 style={{ color: 'goldenrod', padding: '1rem' }} >Crypto -Currencies</h2>
+                }
+            </Link>
         </div>
     )
 }
