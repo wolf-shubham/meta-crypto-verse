@@ -47,24 +47,27 @@ const Profile = () => {
                 }}
             >
                 <h1>profile</h1>
+                {watchlistCoin.length > 0 ? <h1>Your watchlist</h1> : <h1>You have no coins in your watchlist</h1>}
                 <div>
-                    {coinsData.map((coin) => {
-                        if (watchlistCoin.includes(coin.id))
-                            return (
-                                <div style={{ marginTop: '1rem' }} key={coin.id}>
-                                    <h2>{coin.name}</h2>
-                                    <img src={coin.image} alt={coin.name} />
-                                    <h3 style={{ display: "flex", gap: 8 }}>
-                                        {symbol}{" "}
-                                        {numberWithCommas(coin.current_price.toFixed(2))}
-                                    </h3>
-                                    <i className="fa-solid fa-trash"
-                                        onClick={(e) => { handleRemoveCoin(coin.id) }}
-                                    ></i>
-                                </div>
-                            );
-                        else return <></>
-                    })}
+                    {coinsData.map((coin, i) => (
+                        <div key={i}>
+                            {
+                                watchlistCoin.includes(coin.id) ?
+                                    <div>
+                                        <h2>{coin.name}</h2>
+                                        <img src={coin.image} alt={coin.name} />
+                                        <h3 style={{ display: "flex", gap: 8 }}>
+                                            {symbol}{" "}
+                                            {numberWithCommas(coin.current_price.toFixed(2))}
+                                        </h3>
+                                        <i className="fa-solid fa-trash"
+                                            onClick={(e) => { handleRemoveCoin(coin.id) }}
+                                        ></i>
+                                    </div>
+                                    : null
+                            }
+                        </div>
+                    ))}
                 </div>
             </div>
         </div >
