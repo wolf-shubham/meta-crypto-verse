@@ -44,7 +44,10 @@ const CryptoContext = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        fetchCoins()
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+        if (userInfo) {
+            fetchCoins()
+        }
     }, [])
 
 
