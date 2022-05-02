@@ -8,7 +8,7 @@ import axios from 'axios'
 
 const Coin = ({ trend }) => {
 
-    const { watchlistCoin, symbol, token, setWatchlistCoin } = CryptoContextState()
+    const { user, watchlistCoin, symbol, token, setWatchlistCoin } = CryptoContextState()
     const coinId = trend.id
 
     const handleSubmit = async (e) => {
@@ -44,7 +44,7 @@ const Coin = ({ trend }) => {
                             <img src={trend.image} alt={trend.name} style={{ width: '35px', height: '35px' }} />
                         }
                         subheader={trend.symbol}
-                        action={watchlistCoin.includes(trend.id) ? null : <AddCircle onClick={handleSubmit} style={{ color: '#24A19C' }} />}
+                        action={watchlistCoin.includes(trend.id) ? null : (user ? <AddCircle onClick={handleSubmit} style={{ color: '#24A19C' }} /> : null)}
                     >
                     </CardHeader>
                 </Link>
