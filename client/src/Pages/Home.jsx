@@ -40,7 +40,7 @@ const Home = () => {
                 <h1>Crypto Currencies</h1>
                 {loading ? <CircularProgress /> :
                     (
-                        <Grid container rowSpacing={1} columnSpacing={2}>
+                        <Grid container rowSpacing={2} columnSpacing={2}>
                             {
                                 trending && trending.map(trend => (
                                     <Grid item xs={12} sm={6} md={4} lg={3} key={trend.id}>

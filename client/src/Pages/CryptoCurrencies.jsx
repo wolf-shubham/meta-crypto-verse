@@ -10,13 +10,11 @@ const CryptoCurrencies = () => {
                 style={{
                     flex: 9.5,
                     height: '90vh',
-                    backgroundColor: 'yellowgreen',
-                    overflowY: 'scroll',
+                    backgroundColor: 'white',
                     paddingLeft: '1rem',
                     paddingTop: '5px'
                 }}
             >
-                <h1>cryptocurrencies</h1>
                 <CryptoCoins />
             </div>
         </div>

@@ -36,19 +36,19 @@ const Coin = ({ trend }) => {
 
     return (
         <>
-            <Card>
+            <Card style={{ boxShadow: `rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em` }}>
                 <Link to={`/crypto/${trend.id}`} style={{ textDecoration: 'none', color: 'black' }}>
                     <CardHeader
-                        title={<h2>{trend.name}</h2>}
+                        title={<h4>{trend.name}</h4>}
                         avatar={
-                            <img src={trend.image} alt={trend.name} style={{ width: '40px' }} />
+                            <img src={trend.image} alt={trend.name} style={{ width: '35px', height: '35px' }} />
                         }
                         subheader={trend.symbol}
-                        action={watchlistCoin.includes(trend.id) ? null : <AddCircle onClick={handleSubmit} style={{ color: '#2155CD' }} />}
+                        action={watchlistCoin.includes(trend.id) ? null : <AddCircle onClick={handleSubmit} style={{ color: '#24A19C' }} />}
                     >
                     </CardHeader>
                 </Link>
-                <CardContent>
+                <CardContent sx={{ mb: -1, mt: -1 }}>
                     <Grid container>
                         <Grid item xs={12} sm={6} md={4} lg={3}>
                             <h3>{symbol}{numberWithCommas(trend.current_price)}</h3>
