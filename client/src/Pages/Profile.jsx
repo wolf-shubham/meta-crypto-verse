@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import LeftNavbar from '../components/LeftNavbar'
 import { numberWithCommas } from '../config/Functions'
 import { CryptoContextState } from '../context/CryptoContextAPI'
@@ -43,10 +43,12 @@ const Profile = () => {
                 style={{
                     flex: 9.5,
                     height: '90vh',
-                    backgroundColor: 'yellowgreen'
+                    backgroundColor: 'yellowgreen',
+                    overflowY: 'scroll',
+                    paddingLeft: '1rem',
+                    paddingTop: '5px'
                 }}
             >
-                <h1>profile</h1>
                 {watchlistCoin.length > 0 ? <h1>Your watchlist</h1> : <h1>You have no coins in your watchlist</h1>}
                 <div>
                     {coinsData.map((coin, i) => (
@@ -54,14 +56,20 @@ const Profile = () => {
                             {
                                 watchlistCoin.includes(coin.id) ?
                                     <div>
-                                        <h2>{coin.name}</h2>
-                                        <img src={coin.image} alt={coin.name} />
-                                        <h3 style={{ display: "flex", gap: 8 }}>
+                                        <Link to={`/crypto/${coin.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                                            <h2>{coin.name}</h2>
+                                        </Link>
+                                        <img src={coin.image} alt={coin.name} style={{ width: '40px' }} />
+                                        <h3>
                                             {symbol}{" "}
                                             {numberWithCommas(coin.current_price.toFixed(2))}
                                         </h3>
                                         <i className="fa-solid fa-trash"
                                             onClick={(e) => { handleRemoveCoin(coin.id) }}
+                                            style={{
+                                                fontSize: '1.5rem',
+                                                cursor: 'pointer'
+                                            }}
                                         ></i>
                                     </div>
                                     : null
@@ -69,7 +77,7 @@ const Profile = () => {
                         </div>
                     ))}
                 </div>
-            </div>
+            </div >
         </div >
     )
 }

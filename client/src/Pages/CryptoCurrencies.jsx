@@ -11,7 +11,9 @@ const CryptoCurrencies = () => {
                     flex: 9.5,
                     height: '90vh',
                     backgroundColor: 'yellowgreen',
-                    overflowY: 'scroll'
+                    overflowY: 'scroll',
+                    paddingLeft: '1rem',
+                    paddingTop: '5px'
                 }}
             >
                 <h1>cryptocurrencies</h1>

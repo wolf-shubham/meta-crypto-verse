@@ -42,6 +42,13 @@ const LeftNavbar = () => {
                         <h2 style={{ color: 'goldenrod', padding: '1rem' }} >Crypto -Currencies</h2>
                 }
             </Link>
+            <Link to='/global-stats' onClick={() => setTab('/global-stats')} style={{ textDecoration: 'none' }}>
+                {
+                    tab === '/global-stats' ?
+                        <h2 style={{ color: 'black', backgroundColor: 'white', padding: '0.5rem 1rem' }}>Global-Crypto-Stats</h2> :
+                        <h2 style={{ color: 'goldenrod', padding: '1rem' }} >Global-Crypto-Stats </h2>
+                }
+            </Link>
         </div>
     )
 }

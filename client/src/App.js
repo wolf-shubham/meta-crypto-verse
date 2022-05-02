@@ -8,6 +8,7 @@ import Error404 from './pages/Error404';
 import CryptoDetails from './pages/CryptoDetails';
 import News from './pages/News';
 import CryptoCurrencies from './pages/CryptoCurrencies';
+import GlobalCryptoStats from './pages/GlobalCryptoStats';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/cryptocurrencies' element={<CryptoCurrencies />} />
         <Route path='/crypto/:id' element={<CryptoDetails />} />
         <Route path='/news' element={<News />} />
+        <Route path='/global-stats' element={<GlobalCryptoStats />} />
         <Route path='*' element={<Error404 />} />
       </Routes>
     </div>

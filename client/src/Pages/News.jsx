@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import LeftNavbar from '../components/LeftNavbar'
+import logo from '../images/logo.png'
 
 const News = () => {
 
@@ -43,24 +44,34 @@ const News = () => {
                 style={{
                     flex: 9.5,
                     height: '90vh',
-                    backgroundColor: 'yellowgreen',
+                    backgroundColor: 'white',
                     overflowY: 'scroll',
+                    paddingLeft: '1rem',
+                    paddingTop: '5px'
                 }}
             >
-                <h1>news</h1>
                 {
                     news.map((news, i) => (
-                        <div key={i}>
-                            <a href={news.url} target='_blank' rel='noreferrer'>
-                                <h2>{news.name}</h2>
-                                <h3>{news.description}</h3>
-                                <img src={news?.image?.thumbnail?.contentUrl} alt='' />
-                            </a>
+                        <div key={i} style={{ display: 'flex', boxShadow: `rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset`, padding: '1rem 0', marginTop: '15px', marginRight: '1rem', borderRadius: '5px' }}>
+                            <div >
+                                <img src={news?.image?.thumbnail?.contentUrl || logo} alt={''}
+                                    style={{
+                                        width: '100px',
+                                        marginLeft: '1rem'
+                                    }}
+                                />
+                            </div>
+                            <div style={{ marginLeft: '1rem' }}>
+                                <a href={news.url} target='_blank' rel='noreferrer' style={{ color: 'black', textDecoration: 'none' }}>
+                                    <h2>{news.name}</h2>
+                                </a>
+                                <h3 style={{ color: '#393E46', marginTop: '5px' }}>{news.description}</h3>
+                            </div>
                         </div>
                     ))
                 }
             </div>
-        </div>
+        </div >
     )
 }
 
