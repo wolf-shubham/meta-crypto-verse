@@ -3,13 +3,12 @@ import LeftNavbar from '../components/LeftNavbar'
 import axios from 'axios'
 import { TrendingCoins } from '../config/Api'
 import { CryptoContextState } from '../context/CryptoContextAPI'
-import { numberWithCommas } from '../config/Functions'
-import { CircularProgress } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { CircularProgress, Grid, Paper } from '@mui/material'
+import Coin from '../components/Coin'
 
 const Home = () => {
 
-    const { currency, symbol } = CryptoContextState()
+    const { currency } = CryptoContextState()
     const [trending, setTrending] = useState()
     const [loading, setLoading] = useState(false)
     const trendingCoins = async () => {
@@ -31,7 +30,6 @@ const Home = () => {
             <div
                 style={{
                     flex: 9.5,
-                    // width: '75%',
                     height: '90vh',
                     backgroundColor: 'white',
                     overflowY: 'scroll',
@@ -45,25 +43,22 @@ const Home = () => {
                     <h3>last 24hrs transactions volume : 'millify(globalCryptoData.total24hVolume)'</h3>
                     <h3>total market cap : 'millify(globalCryptoData.totalMarketCap)'</h3>
                 </div>
-                <div className="cryptoCurrencies">
-                    <h1>Crypto Currencies</h1>
-                    {loading ? <CircularProgress /> :
-                        (
-                            trending && trending.map(trend => (
-
-                                <div key={trend.id}>
-                                    <Link to={`/crypto/${trend.id}`} ><h2>{trend.name}</h2>
-                                        <img src={trend.image} alt={trend.name} /></Link>
-                                    <h3>{trend.symbol}</h3>
-                                    <h3>{symbol} {numberWithCommas(trend.current_price)}</h3>
-                                    <h3 style={{
-                                        color: trend.price_change_percentage_24h > 0 ? 'green' : 'red'
-                                    }}>{trend.price_change_percentage_24h.toFixed(2)}</h3>
-                                </div>
-                            ))
-                        )
-                    }
-                </div>
+                <h1>Crypto Currencies</h1>
+                {loading ? <CircularProgress /> :
+                    (
+                        <Grid container rowSpacing={1} columnSpacing={2}>
+                            {
+                                trending && trending.map(trend => (
+                                    <Grid item xs={12} sm={6} md={4} lg={3} key={trend.id}>
+                                        <Paper>
+                                            <Coin trend={trend} />
+                                        </Paper>
+                                    </Grid>
+                                ))
+                            }
+                        </Grid>
+                    )
+                }
             </div>
         </div>
     )

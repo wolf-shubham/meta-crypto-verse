@@ -43,7 +43,8 @@ const News = () => {
                 style={{
                     flex: 9.5,
                     height: '90vh',
-                    backgroundColor: 'yellowgreen'
+                    backgroundColor: 'yellowgreen',
+                    overflowY: 'scroll',
                 }}
             >
                 <h1>news</h1>
