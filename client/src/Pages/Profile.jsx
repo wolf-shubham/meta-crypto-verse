@@ -44,7 +44,7 @@ const Profile = () => {
                 style={{
                     flex: 9.5,
                     height: '90vh',
-                    backgroundColor: 'yellowgreen',
+                    backgroundColor: 'white',
                     overflowY: 'scroll',
                     paddingLeft: '1rem',
                     paddingTop: '5px'
@@ -64,10 +64,11 @@ const Profile = () => {
                                         width: '23.5%',
                                         height: '22vh',
                                         backgroundColor: 'white',
-                                        marginLeft: '10px',
-                                        marginBottom: '10px',
+                                        marginLeft: '15px',
+                                        marginBottom: '15px',
                                         padding: '10px',
                                         borderRadius: '5px',
+                                        boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`
                                     }}>
                                         <div style={{
                                             display: 'flex',
