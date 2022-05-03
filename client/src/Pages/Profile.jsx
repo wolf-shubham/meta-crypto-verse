@@ -29,6 +29,7 @@ const Profile = () => {
             console.log(error)
         }
     }
+    // console.log(coinsData)
 
     useEffect(() => {
         if (!userInfo) {
@@ -50,27 +51,63 @@ const Profile = () => {
                 }}
             >
                 {watchlistCoin.length > 0 ? <h1>Your watchlist</h1> : <h1>You have no coins in your watchlist</h1>}
-                <div>
+                <div style={{
+                    backgroundColor: 'wheat',
+                    margin: '20px auto',
+                }}>
                     {coinsData.map((coin, i) => (
-                        <div key={i}>
+                        <div key={i} >
                             {
                                 watchlistCoin.includes(coin.id) ?
-                                    <div>
-                                        <Link to={`/crypto/${coin.id}`} style={{ textDecoration: 'none', color: 'black' }}>
-                                            <h2>{coin.name}</h2>
-                                        </Link>
-                                        <img src={coin.image} alt={coin.name} style={{ width: '40px' }} />
-                                        <h3>
-                                            {symbol}{" "}
-                                            {numberWithCommas(coin.current_price.toFixed(2))}
-                                        </h3>
-                                        <i className="fa-solid fa-trash"
-                                            onClick={(e) => { handleRemoveCoin(coin.id) }}
-                                            style={{
-                                                fontSize: '1.5rem',
-                                                cursor: 'pointer'
-                                            }}
-                                        ></i>
+                                    <div style={{
+                                        float: 'left',
+                                        width: '23.5%',
+                                        height: '22vh',
+                                        backgroundColor: 'white',
+                                        marginLeft: '10px',
+                                        marginBottom: '10px',
+                                        padding: '10px',
+                                        borderRadius: '5px',
+                                    }}>
+                                        <div style={{
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                            marginTop: '5px'
+                                        }}>
+                                            <div style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                            }}>
+                                                <img src={coin.image} alt={coin.name} style={{ width: '40px', marginRight: '1rem' }} />
+                                                <div>
+                                                    <Link to={`/crypto/${coin.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                                                        <h2>{coin.name}</h2>
+                                                    </Link>
+                                                    <h3>{coin.symbol}</h3>
+                                                </div>
+                                            </div>
+                                            <i className="fa-solid fa-trash"
+                                                onClick={(e) => { handleRemoveCoin(coin.id) }}
+                                                style={{
+                                                    fontSize: '1.2rem',
+                                                    cursor: 'pointer'
+                                                }}
+                                            ></i>
+                                        </div>
+                                        <div style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            marginTop: '1.3rem'
+                                        }}>
+                                            <h3>
+                                                {symbol}{" "}
+                                                {numberWithCommas(coin.current_price.toFixed(2))}
+                                            </h3>
+                                            <h3 style={{
+                                                color: coin.price_change_percentage_24h > 0 ? 'green' : 'red'
+                                            }}>{coin.price_change_percentage_24h.toFixed(2)}%</h3>
+                                        </div>
                                     </div>
                                     : null
                             }

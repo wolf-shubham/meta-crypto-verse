@@ -3,7 +3,7 @@ import LeftNavbar from '../components/LeftNavbar'
 import axios from 'axios'
 import { TrendingCoins } from '../config/Api'
 import { CryptoContextState } from '../context/CryptoContextAPI'
-import { CircularProgress, Grid, Paper } from '@mui/material'
+import { CircularProgress, Grid, Paper, Typography } from '@mui/material'
 import Coin from '../components/Coin'
 
 const Home = () => {
@@ -37,7 +37,9 @@ const Home = () => {
                     paddingTop: '5px'
                 }}
             >
-                <h1>Crypto Currencies</h1>
+                <Typography variant="h3" style={{ margin: '1rem 0' }}>
+                    Trending Crypto Currencies
+                </Typography>
                 {loading ? <CircularProgress /> :
                     (
                         <Grid container rowSpacing={2} columnSpacing={2}>
