@@ -61,7 +61,7 @@ const News = () => {
                                     }}
                                 />
                             </div>
-                            <div style={{ marginLeft: '1rem' }}>
+                            <div style={{ margin: '0 1rem' }}>
                                 <a href={news.url} target='_blank' rel='noreferrer' style={{ color: 'black', textDecoration: 'none' }}>
                                     <h2>{news.name}</h2>
                                 </a>

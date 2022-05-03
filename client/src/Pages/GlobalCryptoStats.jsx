@@ -1,13 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import LeftNavbar from '../components/LeftNavbar'
 import axios from 'axios'
-import millify from 'millify'
+import { Card, CardHeader, CircularProgress, Grid, Typography } from '@mui/material'
 
 const GlobalCryptoStats = () => {
 
-    const [cryptoData, setCryptoData] = useState('')
+    const [cryptoData, setCryptoData] = useState()
+    const [newCoins, setNewCoins] = useState()
+    const [loading, setLoading] = useState(false)
 
     const getGlobalStats = async () => {
+        try {
+            setLoading(true)
+            const options = {
+                method: 'GET',
+                url: 'https://coingecko.p.rapidapi.com/global',
+                headers: {
+                    'X-RapidAPI-Host': 'coingecko.p.rapidapi.com',
+                    'X-RapidAPI-Key': 'fb8fef0350msh351759caacd139dp1774fajsn01c73d537b42'
+                }
+            };
+            const { data } = await axios(options)
+            // console.log(data.data)
+            setCryptoData(data.data)
+            setLoading(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const newestCoins = async () => {
         try {
             const options = {
                 method: 'GET',
@@ -20,7 +42,7 @@ const GlobalCryptoStats = () => {
             }
             const { data } = await axios(options)
             // console.log(data)
-            setCryptoData(data.data)
+            setNewCoins(data?.data)
         } catch (error) {
             console.log(error)
         }
@@ -28,6 +50,9 @@ const GlobalCryptoStats = () => {
 
     useEffect(() => {
         getGlobalStats()
+    }, [])
+    useEffect(() => {
+        newestCoins()
     }, [])
 
 
@@ -44,25 +69,47 @@ const GlobalCryptoStats = () => {
                     paddingTop: '5px'
                 }}
             >
-                <div className="globalStats">
-                    <h2>global crypto stats</h2>
-                    <h3>Total Crypto Coins : {cryptoData.totalCoins}</h3>
-                    <h3>Total Crypto Exchanges : {cryptoData.totalExchanges}</h3>
-                    <h3>Last 24hrs Transactions Volume : {millify(cryptoData.total24hVolume)}</h3>
-                    <h3>Total Market Cap : {millify(cryptoData.totalMarketCap)}</h3>
-                </div>
-                <div>
-                    <h2>Newest Coins</h2>
-                    {cryptoData.newestCoins.map((coin, index) => (
-                        <div key={index} className="newestCoins">
-                            <h3>{coin.name}</h3>
-                            <h4>{coin.symbol}</h4>
-                            <img src={coin.iconUrl} alt={coin.name} style={{ width: '50px', borderRadius: '50%' }} />
-                        </div>
-                    ))}
-                </div>
+                {
+                    loading ?
+                        <CircularProgress /> :
+                        <>
+                            <div className="globalStats">
+                                <Typography variant="h3" >Global Stats</Typography>
+                                <Typography variant="h5">Currencies in circulation : {cryptoData?.active_cryptocurrencies}</Typography>
+                                <Typography variant="h5">Total Markets : {cryptoData?.markets}</Typography>
+                                <Typography variant="h5">Ongoing ICOs : {cryptoData?.ongoing_icos}</Typography>
+                                <Typography variant="h5">Ended ICOs : {cryptoData?.ended_icos}</Typography>
+                                <Typography variant="h5">Market Cap Change in last 24hrs : <span
+                                    style={{
+                                        color: cryptoData?.price_change_percentage_24h > 0 ? 'green' : 'red'
+                                    }}
+                                >{cryptoData?.market_cap_change_percentage_24h_usd.toFixed(2)}%</span></Typography>
+                            </div>
+                            <Typography variant="h3" style={{ margin: '1rem 0' }}>
+                                Latest Coins
+                            </Typography>
+                            <Grid container rowSpacing={2} columnSpacing={2}>
+                                {
+                                    newCoins && newCoins.newestCoins.map(trend => (
+                                        <Grid item xs={12} sm={6} md={4} lg={3} key={trend.uuid}>
+                                            <Card >
+                                                <CardHeader
+                                                    avatar={
+                                                        <img src={trend.iconUrl} alt={trend.name} style={{ width: '50px', height: '50px' }} />
+                                                    }
+                                                    title={<h2>{trend.name}</h2>}
+                                                    subheader={<h3>{trend.symbol}</h3>}
+                                                />
+                                            </Card>
+                                        </Grid>
+                                    ))
+                                }
+                            </Grid>
+
+                        </>
+                }
             </div>
-        </div>
+        </div >
     )
 }
 
