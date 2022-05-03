@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { SingleCoin } from '../config/Api'
 import { CryptoContextState } from '../context/CryptoContextAPI'
 import { numberWithCommas } from '../config/Functions'
-import millify from 'millify'
 import { Button } from '@mui/material'
 
 const CryptoDetailsNavbar = ({ coin }) => {
@@ -106,8 +105,8 @@ const CryptoDetailsNavbar = ({ coin }) => {
                             {coinData.market_data.price_change_percentage_24h.toFixed(2)}%
                         </span>
                     </h3>
-                    <h3>Market Cap : {symbol} {millify(coinData.market_data.market_cap[currency.toLowerCase()])}</h3>
-                    <h3>Max Coin Supply : {millify(coinData.market_data.max_supply)}</h3>
+                    <h3>Market Cap : {symbol} {coinData.market_data.market_cap[currency.toLowerCase()]}</h3>
+                    <h3>Max Coin Supply : {coinData.market_data.max_supply}</h3>
                     <h3>Ledger start : {coinData.genesis_date}</h3>
                     <h3>Hashing Algo : {coinData.hashing_algorithm}</h3>
                     {user ?
