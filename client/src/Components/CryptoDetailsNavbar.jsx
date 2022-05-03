@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { SingleCoin } from '../config/Api'
 import { CryptoContextState } from '../context/CryptoContextAPI'
-import ReactHtmlParser from 'react-html-parser'
 import { numberWithCommas } from '../config/Functions'
 import millify from 'millify'
 import { Button } from '@mui/material'
@@ -22,6 +21,7 @@ const CryptoDetailsNavbar = ({ coin }) => {
 
     const fetchCoin = async () => {
         const { data } = await axios.get(SingleCoin(coin.id))
+        console.log(data);
         setCoinData(data)
     }
 
@@ -80,30 +80,43 @@ const CryptoDetailsNavbar = ({ coin }) => {
             style={{
                 flex: 2.5,
                 height: '90vh',
-                backgroundColor: 'darkgoldenrod'
+                backgroundColor: 'black',
+                color: 'darkgoldenrod',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                textAlign: 'center',
+                paddingTop: '20px',
             }}
         >
             {
                 coinData &&
                 <>
-                    <h2>{coinData.name}</h2>
-                    <img src={coinData.image.large} alt={coinData.name} />
-                    <h3>{coinData.symbol}</h3>
-                    <h3>{ReactHtmlParser(coinData?.description.en.split('. ')[0])}.</h3>
-                    <h3 style={{
-                        color: coinData.price_change_percentage_24h > 0 ? 'green' : 'red'
-                    }}>{coinData.market_data.price_change_percentage_24h}%</h3>
+                    <img src={coinData.image.large} alt={coinData.name} style={{ width: '10rem' }} />
+                    <h2>{coinData.name} ({coinData.symbol})</h2>
                     <h3>Rank : {coinData.market_cap_rank}</h3>
                     <h3>Current Price : {symbol} {numberWithCommas(coinData.market_data.current_price[currency.toLowerCase()])}</h3>
+                    <h3>Price Change :{' '}
+                        <span
+                            style={{
+                                color: coinData.market_data.price_change_percentage_24h > 0 ? 'green' : 'red'
+                            }}
+                        >
+                            {coinData.market_data.price_change_percentage_24h.toFixed(2)}%
+                        </span>
+                    </h3>
                     <h3>Market Cap : {symbol} {millify(coinData.market_data.market_cap[currency.toLowerCase()])}</h3>
+                    <h3>Max Coin Supply : {millify(coinData.market_data.max_supply)}</h3>
+                    <h3>Ledger start : {coinData.genesis_date}</h3>
+                    <h3>Hashing Algo : {coinData.hashing_algorithm}</h3>
                     {user ?
                         <Button
                             variant="contained"
                             color="primary"
                             disabled={loading}
                             style={{
-                                marginTop: '10px',
-                                marginBottom: '10px'
+                                marginBottom: '25px'
                             }}
                             onClick={watchlist ? handleRemoveCoin : handleSubmit}
                         >{watchlist ? 'remove from watchlist' : 'add to watchlist'}

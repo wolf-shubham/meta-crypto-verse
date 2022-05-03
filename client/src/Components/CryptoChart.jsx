@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { HistoricalChart } from '../config/Api'
 import { CryptoContextState } from '../context/CryptoContextAPI'
 import { Line } from "react-chartjs-2"
-import { CircularProgress } from '@mui/material'
+import { Button, CircularProgress } from '@mui/material'
 // eslint-disable-next-line no-unused-vars
 import { Chart as ChartJS } from 'chart.js/auto'
 
@@ -48,7 +48,8 @@ const CryptoChart = ({ coin }) => {
                                         {
                                             data: historicData?.map(item => item[1]),
                                             label: `Price in ${currency} ${symbol} over last ${days} days`,
-                                            borderColor: '#3f51b5',
+                                            borderColor: 'goldenrod',
+                                            fill: false
                                         }]
                                 }}
                                 options={{
@@ -60,10 +61,40 @@ const CryptoChart = ({ coin }) => {
                         </>
                     )
             }
-            <button onClick={() => setDays(1)}>1 day</button>
-            <button onClick={(e) => setDays(7)}>1 week</button>
-            <button onClick={(e) => setDays(30)}>1 month</button>
-            <button onClick={(e) => setDays(365)}>1 year</button>
+            <div style={{
+                width: '70%',
+                display: 'flex',
+                alignItems: 'center',
+                marginLeft: '15%',
+                justifyContent: 'space-around',
+                fontWeight: '600'
+
+            }}>
+                <Button disabled={days === 1} onClick={() => setDays(1)} style={{
+                    backgroundColor: days === 1 ? 'black' : '',
+                    border: '1px solid black',
+                    color: days === 1 ? 'goldenrod' : 'black',
+                    fontWeight: '600'
+                }}>1 day</Button>
+                <Button disabled={days === 7} onClick={(e) => setDays(7)} style={{
+                    backgroundColor: days === 7 ? 'black' : '',
+                    border: '1px solid black',
+                    color: days === 7 ? 'goldenrod' : 'black',
+                    fontWeight: '600'
+                }}>1 week</Button>
+                <Button disabled={days === 30} onClick={(e) => setDays(30)} style={{
+                    backgroundColor: days === 30 ? 'black' : '',
+                    border: '1px solid black',
+                    color: days === 30 ? 'goldenrod' : 'black',
+                    fontWeight: '600'
+                }}>1 month</Button>
+                <Button disabled={days === 365} onClick={(e) => setDays(365)} style={{
+                    backgroundColor: days === 365 ? 'black' : '',
+                    border: '1px solid black',
+                    color: days === 365 ? 'goldenrod' : 'black',
+                    fontWeight: '600'
+                }}>1 year</Button>
+            </div>
         </div>
     )
 }

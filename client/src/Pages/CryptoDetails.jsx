@@ -35,7 +35,7 @@ const CryptoDetails = () => {
                 style={{
                     flex: 9.5,
                     height: '90vh',
-                    backgroundColor: 'yellowgreen',
+                    backgroundColor: 'white',
                     paddingLeft: '1rem',
                     paddingTop: '5px'
                 }}
